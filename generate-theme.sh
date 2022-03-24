@@ -18,14 +18,16 @@ cat > "$THEME_PATH/manifest.json" << EOF
   "theme": {
     "colors" : {
       "frame" : [$(hexToRgb $background)],
+      "frame_inactive": [$(hexToRgb $background)],
       "toolbar" : [$(hexToRgb $color11)],
       "ntp_text" : [$(hexToRgb $foreground)],
       "ntp_link" : [$(hexToRgb $color11)],
       "ntp_section" : [$(hexToRgb $color8)],
-      "button_background" : [$(hexToRgb $foreground)]
-    },
-    "tints" : {
-      "buttons" : [$(hexToRgb $color11)]
+      "button_background" : [$(hexToRgb $foreground)],
+      "toolbar_button_icon" : [$(hexToRgb $foreground)],
+      "toolbar_text": [$(hexToRgb $foreground)],
+      "omnibox_background": [$(hexToRgb $background)],
+      "omnibox_text": [$(hexToRgb $foreground)]
     },
     "properties" : {
       "ntp_background_alignment" : "bottom"
