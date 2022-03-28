@@ -11,7 +11,7 @@ Generates [pywal](https://github.com/dylanaraps/pywal) theme for Chromium
 3. Go to `chrome://extensions`
 4. Turn on "Developer Mode" in the top right corner
 5. Press "Load unpacked"
-6. Select "GeneratedTheme" in the same folder with the script
+6. Select "Pywal" (by default) in the same folder with the script
 7. ???
 8. PROFIT!
 

@@ -1,9 +1,12 @@
 #!/bin/bash
 
-. ~/.cache/wal/colors.sh
+. ~/.cache/wal/colors.sh # import colors from pywal
+
+THEME_NAME="Pywal"
+
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
-THEME_DIR="$DIR/GeneratedTheme"
+THEME_DIR="$DIR/$THEME_NAME"
 
 # Converts hex colors into rgb joined with comma
 # #fff -> 255, 255, 255
@@ -13,52 +16,58 @@ hexToRgb() {
     printf "%d, %d, %d" 0x${plain:0:2} 0x${plain:2:2} 0x${plain:4:2}
 }
 
-if [ ! -d $THEME_DIR ]; then
+prepare() {
+    if [ -d $THEME_DIR ]; then
+        rm -rf $THEME_DIR
+    fi
+    
     mkdir $THEME_DIR
-fi
-
-if [ ! -d "$THEME_DIR/images" ]; then
     mkdir "$THEME_DIR/images"
-fi
+    
+    # Copy wallpaper so it can be used in theme  
+    background_image="images/theme_ntp_background_norepeat.png"
+    cp "$wallpaper" "$THEME_DIR/$background_image"
 
-# Copy wallpaper so it can be used in theme  
-background_image="images/theme_ntp_background_norepeat.png"
-cp "$wallpaper" "$THEME_DIR/$background_image"
-
-# Theme template
-cat > "$THEME_DIR/manifest.json" << EOF
-{
-  "manifest_version": 3,
-  "version": "1.0",
-  "name": "Pywal Theme",
-  "theme": {
-    "images": {
-      "theme_ntp_background" : "$background_image"
-    },
-    "colors": {
-      "frame": [$(hexToRgb $background)],
-      "frame_inactive": [$(hexToRgb $background)],
-      "toolbar": [$(hexToRgb $color11)],
-      "ntp_text": [$(hexToRgb $foreground)],
-      "ntp_link": [$(hexToRgb $color11)],
-      "ntp_section": [$(hexToRgb $color8)],
-      "button_background": [$(hexToRgb $foreground)],
-      "toolbar_button_icon": [$(hexToRgb $foreground)],
-      "toolbar_text": [$(hexToRgb $foreground)],
-      "omnibox_background": [$(hexToRgb $background)],
-      "omnibox_text": [$(hexToRgb $foreground)]
-    },
-    "properties": {
-      "ntp_background_alignment": "bottom"
-    }
-  }
 }
+
+
+background=$(hexToRgb $background)
+foreground=$(hexToRgb $foreground)
+accent=$(hexToRgb $color11)
+secondary=$(hexToRgb $color8)
+
+generate() {
+    # Theme template
+    cat > "$THEME_DIR/manifest.json" << EOF
+    {
+      "manifest_version": 3,
+      "version": "1.0",
+      "name": "$THEME_NAME Theme",
+      "theme": {
+        "images": {
+          "theme_ntp_background" : "$background_image"
+        },
+        "colors": {
+          "frame": [$background],
+          "frame_inactive": [$background],
+          "toolbar": [$accent],
+          "ntp_text": [$foreground],
+          "ntp_link": [$accent],
+          "ntp_section": [$secondary)],
+          "button_background": [$foreground],
+          "toolbar_button_icon": [$foreground],
+          "toolbar_text": [$foreground],
+          "omnibox_background": [$background],
+          "omnibox_text": [$foreground]
+        },
+        "properties": {
+          "ntp_background_alignment": "bottom"
+        }
+      }
+    }
 EOF
+}
 
-
-# Remove cache so chrome will refresh theme colors on restart
-if [ -f "$THEME_DIR/Cached Theme.pak" ]; then
-    rm "$THEME_DIR/Cached Theme.pak"
-fi
-
-echo "Theme generated at $THEME_DIR"
+prepare
+generate
+echo "Pywal Chrome theme generated at $THEME_DIR"
