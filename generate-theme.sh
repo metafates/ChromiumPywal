@@ -22,7 +22,7 @@ if [ ! -d "$THEME_DIR/images" ]; then
 fi
 
 # Copy wallpaper so it can be used in theme  
-wallpaper=${wallpaper// /_} # sanitize path
+wallpaper=${wallpaper// /\/ } # sanitize path
 cp $wallpaper "$THEME_DIR/images/theme_ntp_background_norepeat.png"
 
 # Theme template
