@@ -22,7 +22,8 @@ if [ ! -d "$THEME_DIR/images" ]; then
 fi
 
 # Copy wallpaper so it can be used in theme  
-cp "$wallpaper" "$THEME_DIR/images/theme_ntp_background_norepeat.png"
+background_image="images/theme_ntp_background_norepeat.png"
+cp "$wallpaper" "$THEME_DIR/$background_image"
 
 # Theme template
 cat > "$THEME_DIR/manifest.json" << EOF
@@ -30,10 +31,10 @@ cat > "$THEME_DIR/manifest.json" << EOF
   "manifest_version": 3,
   "version": "1.0",
   "name": "Pywal Theme",
-  "images": {
-      "theme_ntp_background" : "images/theme_ntp_background_norepeat.png"
-  },
   "theme": {
+    "images": {
+      "theme_ntp_background" : "$background_image"
+    },
     "colors": {
       "frame": [$(hexToRgb $background)],
       "frame_inactive": [$(hexToRgb $background)],
