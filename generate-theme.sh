@@ -22,8 +22,7 @@ if [ ! -d "$THEME_DIR/images" ]; then
 fi
 
 # Copy wallpaper so it can be used in theme  
-wallpaper=${wallpaper// /\/ } # sanitize path
-cp $wallpaper "$THEME_DIR/images/theme_ntp_background_norepeat.png"
+cp "$wallpaper" "$THEME_DIR/images/theme_ntp_background_norepeat.png"
 
 # Theme template
 cat > "$THEME_DIR/manifest.json" << EOF
