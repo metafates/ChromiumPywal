@@ -15,6 +15,7 @@ Generates [pywal](https://github.com/dylanaraps/pywal) theme for Chromium
 7. ???
 8. PROFIT!
 
-However, you need to run this script and restart chromium each time you change pywal colors.
+However, you need to run this script and restart chromium each time you change pywal colors (or reload extension manually, since there is no way to do it automatically).
 So, make an alias or something like that.
 But you don't need to repeat the steps above, just run the script and that's it, chromium will update theme colors automatically. 😁
+
