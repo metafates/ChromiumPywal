@@ -53,7 +53,7 @@ generate() {
           "toolbar": [$accent],
           "ntp_text": [$foreground],
           "ntp_link": [$accent],
-          "ntp_section": [$secondary)],
+          "ntp_section": [$secondary],
           "button_background": [$foreground],
           "toolbar_button_icon": [$foreground],
           "toolbar_text": [$foreground],
